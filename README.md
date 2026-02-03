@@ -1,58 +1,48 @@
-# Welcome to your Lovable project
+# OpenMold Ops Suite
 
-## Project info
+Nowoczesny, open-source dashboard do pracy z lokalnym botem OpenMold. Projekt uruchamiasz lokalnie, a panel łączy się bezpośrednio z Twoim gateway w sieci LAN, aby pobierać logi, statystyki i wykonywać zadania.
 
-**URL**: https://lovable.dev/projects/1f056007-f350-4973-ab3d-3d7b5c7cd1db
+## Najważniejsze funkcje
 
-## How can I edit this code?
+- Live sync z OpenMold Bot (status, logi, KPI).
+- Chat UI do wysyłania promptów bezpośrednio do bota.
+- Task manager, biblioteka templatek i szybkie akcje.
+- Nowoczesne statystyki i wizualizacje w stylu SaaS.
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/1f056007-f350-4973-ab3d-3d7b5c7cd1db) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Szybki start
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
 npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Aplikacja startuje domyślnie jako Vite dev server i jest dostępna w przeglądarce po uruchomieniu lokalnym.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Połączenie z lokalnym OpenMold Bot
 
-**Use GitHub Codespaces**
+Dashboard domyślnie używa lokalnego gateway:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+http://192.168.1.1:7331
+```
 
-## What technologies are used for this project?
+Aby się połączyć:
 
-This project is built with:
+1. Uruchom OpenMold Bot lokalnie w tej samej sieci.
+2. Upewnij się, że API bota odpowiada na powyższym gateway.
+3. W panelu „Połączenie z OpenMold” wpisz właściwy adres (jeśli inny) i kliknij „Odśwież połączenie”.
+4. Status powinien przejść na „Online”, a logi pojawią się w sekcji „Live logi bota”.
+
+### Endpointy, z których korzysta UI
+
+Dashboard korzysta z poniższych endpointów (wszystkie względem gateway):
+
+- `GET /status` – status połączenia.
+- `GET /stats` – statystyki i KPI.
+- `GET /logs?limit=6` – najnowsze logi.
+- `POST /chat` – wysyłanie wiadomości do bota (`{ "message": "..." }`).
+
+## Tech stack
 
 - Vite
 - TypeScript
@@ -60,14 +50,6 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
+## Deploy
 
-Simply open [Lovable](https://lovable.dev/projects/1f056007-f350-4973-ab3d-3d7b5c7cd1db) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Panel można uruchomić lokalnie jako open-source dashboard. Jeśli korzystasz z Lovable, nadal możesz go opublikować z poziomu panelu Share -> Publish.
